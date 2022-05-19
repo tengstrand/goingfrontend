@@ -3,12 +3,17 @@
  ["src/main"]
 
  :dependencies
- []
+ [[reagent "1.1.1"]]
 
  :dev-http {8080 "public"}
 
  :builds
  {:app
-  {:target :browser
-   :modules {:main {:init-fn com.github.tengstrand.goingfrontend.app/init}}
-   }}}
+  {:output-dir "public/js"
+                :asset-path "."
+                :target :browser
+                :modules {:main {:init-fn com.github.tengstrand.goingfrontend.app/main}}
+                :devtools {:after-load com.github.tengstrand.goingfrontend.app/mount
+                           :http-root "public"
+                           :http-port 8080}}}}
+
