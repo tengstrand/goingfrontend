@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tw": "tailwind build tw/style.css -- -o target/css/main.css",
+    "tw": "tailwind build -i tw/style.css -- -o target/css/main.css",
     "watch": "shadow-cljs watch app",
     "watch:css": "onchange 'tw/*css' -- npm run tw"
   },
