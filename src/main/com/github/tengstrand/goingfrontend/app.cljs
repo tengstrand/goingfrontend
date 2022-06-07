@@ -1,12 +1,42 @@
 (ns com.github.tengstrand.goingfrontend.app
-  (:require [reagent.dom :as r]))
+  (:require [reagent.dom :as d]
+            [reagent.core :as r]))
 
-(defn main-component []
+(defonce val1 (r/atom 0))
+(defonce val2 (r/atom 0))
+(defonce operator (r/atom "+"))
+
+(def op->operator {"+" +
+                   "-" -
+                   "*" *
+                   "/" /})
+
+(defn result []
+  (let [op (op->operator @operator +)
+        result (op (js/parseInt @val1)
+                   (js/parseInt @val2))]
+     (if (js/isNaN result)
+       ""
+       result)))
+
+(defn set-value [val]
+  #(reset! val (-> % .-target .-value)))
+
+(defn main-page []
   [:div
-   [:h1 "This is a simple web app!"]])
+   [:h2 "Calculator"]
+   [:form {}
+    [:input {:type :number, :value @val1, :on-change (set-value val1)}]
+    [:select {:on-change (set-value operator)}
+     [:option {:key :foo} "+"]
+     [:option {:key :bar} "-"]
+     [:option {:key :baz} "*"]
+     [:option {:key :baz} "/"]]
+    [:input {:type :number, :value @val2, :on-change (set-value val2)}]
+    [:label "=" (result)]]])
 
 (defn mount [c]
-  (r/render [c] (.getElementById js/document "app")))
+  (d/render [c] (.getElementById js/document "app")))
 
 (defn main []
-  (mount main-component))
+  (mount main-page))
