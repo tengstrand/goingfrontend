@@ -29,9 +29,9 @@
     [:input {:type :number, :value @val1, :on-change (set-value val1)}]
     [:select {:on-change (set-value operator)}
      [:option {:key :add} "+"]
-     [:option {:key :subtract} "-"]
-     [:option {:key :multiply} "*"]
-     [:option {:key :divide} "/"]]
+     [:option {:key :sub} "-"]
+     [:option {:key :mul} "*"]
+     [:option {:key :div} "/"]]
     [:input {:type :number, :value @val2, :on-change (set-value val2)}]
     [:label "=" (result)]]])
 
