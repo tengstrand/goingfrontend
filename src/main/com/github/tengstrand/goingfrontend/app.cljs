@@ -28,10 +28,10 @@
    [:form {}
     [:input {:type :number, :value @val1, :on-change (set-value val1)}]
     [:select {:on-change (set-value operator)}
-     [:option {:key :foo} "+"]
-     [:option {:key :bar} "-"]
-     [:option {:key :baz} "*"]
-     [:option {:key :baz} "/"]]
+     [:option {:key :add} "+"]
+     [:option {:key :subtract} "-"]
+     [:option {:key :multiply} "*"]
+     [:option {:key :divide} "/"]]
     [:input {:type :number, :value @val2, :on-change (set-value val2)}]
     [:label "=" (result)]]])
 
