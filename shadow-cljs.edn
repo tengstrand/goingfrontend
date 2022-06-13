@@ -10,10 +10,8 @@
  :builds
  {:app
   {:output-dir "public/js"
-                :asset-path "."
-                :target :browser
-                :modules {:main {:init-fn com.github.tengstrand.goingfrontend.app/main}}
-                :devtools {:after-load com.github.tengstrand.goingfrontend.app/mount
-                           :http-root "public"
-                           :http-port 8080}}}}
-
+   :asset-path "."
+   :target :browser
+   :modules {:main {:init-fn com.github.tengstrand.goingfrontend.app/init}}
+   :devtools {:http-root "public"
+              :http-port 8080}}}}

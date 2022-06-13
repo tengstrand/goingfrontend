@@ -11,13 +11,15 @@
                    "*" *
                    "/" /})
 
+(defonce root (.getElementById js/document "app"))
+
 (defn result []
   (let [op (op->operator @operator +)
         result (op (js/parseInt @val1)
                    (js/parseInt @val2))]
-     (if (js/isNaN result)
-       ""
-       result)))
+    (if (js/isNaN result)
+      ""
+      result)))
 
 (defn set-value [val]
   #(reset! val (-> % .-target .-value)))
@@ -26,17 +28,17 @@
   [:div
    [:h2 "Calculator"]
    [:form {}
-    [:input {:type :number, :value @val1, :on-change (set-value val1)}]
-    [:select {:on-change (set-value operator)}
-     [:option {:key :add} "+"]
-     [:option {:key :sub} "-"]
-     [:option {:key :mul} "*"]
-     [:option {:key :div} "/"]]
-    [:input {:type :number, :value @val2, :on-change (set-value val2)}]
-    [:label "=" (result)]]])
+    [:div.space-x-2
+     [:input {:type :number, :value @val1, :on-change (set-value val1)}]]
+    [:div.space-x-1
+     [:select {:on-change (set-value operator)}
+      [:option {:key :add} "+"]
+      [:option {:key :sub} "-"]
+      [:option {:key :mul} "*"]
+      [:option {:key :div} "/"]]]
+    [:div.space-x-1
+     [:input {:type :number, :value @val2, :on-change (set-value val2)}]]]
+   [:label "=" (result)]])
 
-(defn mount [c]
-  (d/render [c] (.getElementById js/document "app")))
-
-(defn main []
-  (mount main-page))
+(defn ^:dev/after-load init []
+  (d/render [main-page] root))
