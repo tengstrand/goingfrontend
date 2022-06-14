@@ -25,20 +25,18 @@
   #(reset! val (-> % .-target .-value)))
 
 (defn main-page []
-  [:div
-   [:h2 "Calculator"]
-   [:form {}
-    [:div.space-x-2
-     [:input {:type :number, :value @val1, :on-change (set-value val1)}]]
-    [:div.space-x-1
-     [:select {:on-change (set-value operator)}
-      [:option {:key :add} "+"]
-      [:option {:key :sub} "-"]
-      [:option {:key :mul} "*"]
-      [:option {:key :div} "/"]]]
-    [:div.space-x-1
-     [:input {:type :number, :value @val2, :on-change (set-value val2)}]]]
-   [:label "=" (result)]])
+  [:div.flex.flex-col.m-2
+   [:h2.m-2.text-xl.text-white "Calculator"]
+   [:form.flex {}
+    [:input.w-20.m-2.p-1.rounded {:type :number, :value @val1, :on-change (set-value val1)}]
+    [:select.w-15.m-2.p-1.rounded.bg-white {:on-change (set-value operator)}
+     [:option {:key :add} "+"]
+     [:option {:key :sub} "-"]
+     [:option {:key :mul} "*"]
+     [:option {:key :div} "/"]]
+    [:input.w-20.m-2.p-1.rounded {:type :number, :value @val2, :on-change (set-value val2)}]
+    [:label.m-2.mt-3.text-white "="]
+    [:label.m-2.mt-3.text-white (result)]]])
 
 (defn ^:dev/after-load init []
   (d/render [main-page] root))
