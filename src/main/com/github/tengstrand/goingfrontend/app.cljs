@@ -38,5 +38,8 @@
     [:label.m-2.mt-3.text-white "="]
     [:label.m-2.mt-3.text-white (result)]]])
 
-(defn ^:dev/after-load init []
+(defn mount-app []
   (d/render [main-page] root))
+
+(defn ^:export init []
+  (mount-app))
